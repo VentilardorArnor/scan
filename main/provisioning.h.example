@@ -1,0 +1,16 @@
+#pragma once
+
+/*
+ * Dados de fábrica da placa. Copie para main/provisioning.h (que está no
+ * .gitignore) e preencha. Nenhum destes valores vai para o log.
+ *
+ * AGRO_BLE_POP: prova de posse do provisionamento BLE (segurança 2). Texto
+ * aleatório de 8 a 32 caracteres, único por placa, impresso no QR da
+ * etiqueta. Sem ele o modo de configuração BLE não abre.
+ *
+ * AGRO_PROVISIONING: linha gerada na tela Provisionamento de
+ * smartagrobr.com. O token vale uma vez só e vence em 30 dias; depois do
+ * primeiro enroll a placa guarda o certificado e não usa mais o token.
+ */
+#define AGRO_BLE_POP "" /* vazio = BLE não abre */
+#define AGRO_PROVISIONING "agro1://agp-xxxxxxxxxxxx:<token>@api.smartagrobr.com"

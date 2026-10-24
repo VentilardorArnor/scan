@@ -1,0 +1,32 @@
+menu "pivo-fw"
+
+    config PIVO_TELEMETRY_INTERVAL_S
+        int "Intervalo de leitura e envio da telemetria (s)"
+        range 1 3600
+        default 3
+        help
+            A cada intervalo a placa lê os sensores, grava um lote no journal
+            e o publica. Com 3 s são ~28 800 lotes por dia por placa.
+
+    config PIVO_NTP_SERVER
+        string "Servidor NTP"
+        default "pool.ntp.org"
+
+    config PIVO_BOARD_HAS_RELAYS
+        bool "Placa com relés (controle do painel do pivô)"
+        default y
+        help
+            A placa tem relés ligados às entradas de comando do painel
+            original (ADR-007). Os pinos são configurados e mantidos abertos.
+
+    config PIVO_REMOTE_CONTROL
+        bool "Controle remoto dos relés pelo painel web"
+        depends on PIVO_BOARD_HAS_RELAYS
+        default n
+        help
+            Liga o acionamento: um botão no painel web vira um pulso no
+            relé. Desligado (padrão desta etapa), a placa continua assinando
+            /cmd e /config, aplica e confirma a config em /state, mas recusa
+            todo comando com `device_control_disabled` e nunca fecha relé.
+
+endmenu
